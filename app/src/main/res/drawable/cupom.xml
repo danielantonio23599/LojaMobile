@@ -1,0 +1,33 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="512dp"
+    android:height="512dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="m57,9.969 l-50,36.539v7.523l50,-36.539z"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="m13,15v-1.414l1.586,-1.586 -1.586,-1.586v-1.414h-8l2.25,3 -2.25,3z"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="m43.975,29.487 l-15.151,11.072c1.029,0.283 2.089,0.441 3.176,0.441 6.452,0 11.717,-5.123 11.975,-11.513z"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="m20,29c0,1.654 0.359,3.285 1.014,4.79l18.896,-13.809c-2.187,-1.928 -4.953,-2.981 -7.91,-2.981 -6.617,0 -12,5.383 -12,12z"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="m18,29c0,-7.72 6.28,-14 14,-14 3.543,0 6.967,1.378 9.547,3.785l6.832,-4.992 -0.793,-0.793h-2.586v-2h2.586l1.414,-1.414v-6.586h-34v6.586l1.414,1.414h2.586v2h-2.586l-1.414,1.414v23.77l4.351,-3.179c-0.886,-1.867 -1.351,-3.925 -1.351,-6.005zM41,11h2v2h-2zM37,11h2v2h-2zM33,11h2v2h-2zM29,11h2v2h-2zM25,11h2v2h-2zM21,11h2v2h-2z"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="m54.937,9h-3.937v1.414l-1.586,1.586 0.598,0.598z"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="m13,55v-2.877l-3.937,2.877z"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="m46,29c0,7.72 -6.28,14 -14,14 -1.785,0 -3.511,-0.347 -5.15,-0.998l-11.85,8.66v10.338h34v-35.185l-3.054,2.232c0.021,0.318 0.054,0.636 0.054,0.953zM24,51h2c1.654,0 3,1.346 3,3v3h-3v2h-2v-2c-1.654,0 -3,-1.346 -3,-3h2c0,0.551 0.449,1 1,1h3v-1c0,-0.551 -0.449,-1 -1,-1h-2c-1.654,0 -3,-1.346 -3,-3v-3h3v-2h2v2c1.654,0 3,1.346 3,3h-2c0,-0.551 -0.449,-1 -1,-1h-3v1c0,0.551 0.449,1 1,1zM38,58h-4v-4h4zM46,58h-4v-4h4zM47,51h-14v-2h14zM47,47h-14v-2h14z"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="m59,49h-8v6h8l-2.25,-3z"/>
+</vector>

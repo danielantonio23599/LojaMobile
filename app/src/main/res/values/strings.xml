@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">LojaMobile</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="next">Continuar</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_perfil">Perfil</string>
+    <string name="menu_vendas">Vendas</string>
+    <string name="menu_vendas_pesquisa">Pesquisa de Vendas</string>
+    <string name="menu_produtos">Produto</string>
+    <string name="menu_devolver_produto">Devolver Produtos</string>
+    <string name="menu_nota">Notas</string>
+    <string name="menu_recibo">Gerar Recibo</string>
+    <string name="menu_nota_venda">Gerar Notas</string>
+    <string name="menu_caixa">Caixa</string>
+    <string name="menu_caixa_abrir">Abrir Caixa</string>
+    <string name="menu_caixa_fechar">Fechar Caixa</string>
+    <string name="menu_caixa_despesas">Despesas Caixa</string>
+    <string name="menu_caixa_sangria">Sangria Caixa</string>
+    <string name="menu_caixa_movimentacoes">Movimentações Caixa</string>
+    <string name="menu_caixa_relatorio">Gerar Relátorio Caixa</string>
+    <string name="fragment_relatar_add_foto_text">Adicionar Foto</string>
+    <string name="CODIGO">codigo</string>
+    <string name="EMAIL">email</string>
+    <string name="SENHA">senha</string>
+    <string name="FANTAZIA">fantazia</string>
+    <string name="home_second">Home Second</string>
+</resources>

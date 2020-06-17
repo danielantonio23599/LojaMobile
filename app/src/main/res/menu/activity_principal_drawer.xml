@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_perfil"
+            android:icon="@drawable/user"
+            android:title="@string/menu_perfil" />
+    </group>
+    <item android:title="@string/menu_produtos">
+        <menu>
+            <item
+                android:id="@+id/nav_produto"
+                android:icon="@drawable/produtos"
+                android:title="@string/menu_produtos" />
+        </menu>
+    </item>
+    <item android:title="Vendas">
+        <menu>
+            <item
+                android:id="@+id/nav_vendas"
+                android:icon="@drawable/shop"
+                android:title="@string/menu_vendas" />
+            <item
+                android:id="@+id/nav_pesquisa_vendas"
+                android:icon="@drawable/procurar"
+                android:title="@string/menu_vendas_pesquisa" />
+            <item
+                android:id="@+id/nav_devolver"
+                android:icon="@drawable/devolver"
+                android:title="@string/menu_devolver_produto" />
+        </menu>
+    </item>
+    <item android:title="@string/menu_nota">
+        <menu>
+            <item
+                android:id="@+id/nav_notas"
+                android:icon="@drawable/cupom"
+                android:title="@string/menu_recibo" />
+            <item
+                android:id="@+id/nav_promocao"
+                android:icon="@drawable/cupom"
+                android:title="@string/menu_nota_venda" />
+        </menu>
+    </item>
+    <item android:title="@string/menu_caixa">
+        <menu>
+            <item
+                android:id="@+id/nav_caixa_abrir"
+                android:icon="@drawable/abrir_caixa"
+                android:title="@string/menu_caixa_abrir" />
+            <item
+                android:id="@+id/nav_caixa_fechar"
+                android:icon="@drawable/fechar_caixa"
+                android:title="@string/menu_caixa_fechar" />
+            <item
+                android:id="@+id/nav_caixa_despesas"
+                android:icon="@drawable/ic_despesa"
+                android:title="@string/menu_caixa_despesas" />
+            <item
+                android:id="@+id/nav_caixa_sangrias"
+                android:icon="@drawable/ic_verifica"
+                android:title="@string/menu_caixa_sangria" />
+            <item
+                android:id="@+id/nav_caixa_relatorio"
+                android:icon="@drawable/relatorio"
+                android:title="@string/menu_caixa_relatorio" />
+            <item
+                android:id="@+id/nav_caixa_movimentacoes"
+                android:icon="@drawable/ic_analise"
+                android:title="@string/menu_caixa_movimentacoes" />
+        </menu>
+    </item>
+
+</menu>
