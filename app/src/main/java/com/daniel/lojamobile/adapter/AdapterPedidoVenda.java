@@ -16,6 +16,7 @@ import androidx.cardview.widget.CardView;
 
 
 import com.daniel.lojamobile.R;
+import com.daniel.lojamobile.adapter.holder.ProdutosGravados;
 import com.daniel.lojamobile.adapter.holder.Venda;
 
 import java.util.ArrayList;
@@ -25,20 +26,20 @@ import java.util.List;
  * Created by Daniel on 30/05/2018.
  */
 
-public class AdapterMesa extends BaseAdapter {
-    private List<Venda> lin = new ArrayList<Venda>();
+public class AdapterPedidoVenda extends BaseAdapter {
+    private List<ProdutosGravados> lin = new ArrayList<ProdutosGravados>();
 
-    public List<Venda> getLin() {
+    public List<ProdutosGravados> getLin() {
         return lin;
     }
 
-    public void setLin(List<Venda> lin) {
+    public void setLin(List<ProdutosGravados> lin) {
         this.lin = lin;
     }
 
     private Context context;
 
-    public AdapterMesa(Context context) {
+    public AdapterPedidoVenda(Context context) {
         this.context = context;
     }
 
@@ -62,27 +63,16 @@ public class AdapterMesa extends BaseAdapter {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Log.i("[IFMG]", "view: " + lin.get(position).getCodigo());
-        View view = LayoutInflater.from(context).inflate(R.layout.mesa_adapter, parent, false);
-        TextView mesa = (TextView) view.findViewById(R.id.tvMesaNum);
-        CardView back = (CardView) view.findViewById(R.id.back);
-        mesa.setText(lin.get(position).getCodigo() + "");
-        Log.i("[IFMG]", "status : " + lin.get(position).getStatus());
-        switch (lin.get(position).getStatus()) {
-            case "aberta":
-                Log.i("[IFMG]", " Aberta ");
-                back.setCardBackgroundColor(0xFF07935B);
-                break;
-            case "Fechada":
-                back.setCardBackgroundColor(Color.RED);
-                break;
-            case "pendente":
-                back.setBackgroundColor(Color.YELLOW);
-                break;
-            default:
-                back.setCardBackgroundColor(0xFF07935B);
-                break;
-        }
+        Log.i("[IFMG]", "view: " + lin.get(position).getCodPedidVenda());
+        View view = LayoutInflater.from(context).inflate(R.layout.pedido_adapter, parent, false);
+        TextView codigo = (TextView) view.findViewById(R.id.tvCodigo);
+        TextView nome = (TextView) view.findViewById(R.id.tvItemPedido);
+        TextView qtd = (TextView) view.findViewById(R.id.tvQTD);
+        TextView valor = (TextView) view.findViewById(R.id.tvValor);
+        codigo.setText(lin.get(position).getCodProduto() + "");
+        nome.setText(lin.get(position).getNome() + "");
+        qtd.setText(lin.get(position).getQuantidade() + "");
+        valor.setText(lin.get(position).getValorFinal() + "");
         return view;
     }
 }

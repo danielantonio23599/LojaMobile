@@ -57,7 +57,6 @@ public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.MyViewHo
         viewHolder.nome.setText(filteredProdutos.get(position).getNome());
         viewHolder.descricao.setText(filteredProdutos.get(position).getDescricao());
         viewHolder.preco.setText("R$ " + filteredProdutos.get(position).getPreco());
-        viewHolder.tempo.setText(filteredProdutos.get(position).getPreparo());
     }
 
     @Override
@@ -113,7 +112,6 @@ public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.MyViewHo
         private TextView nome;
         private TextView descricao;
         private TextView preco;
-        private TextView tempo;
 
         public MyViewHolder(View view) {
             super(view);
@@ -121,7 +119,6 @@ public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.MyViewHo
             nome = (TextView) view.findViewById(R.id.tvNome);
             descricao = (TextView) view.findViewById(R.id.tvDescricao);
             preco = (TextView) view.findViewById(R.id.tvPreco);
-            tempo = (TextView) view.findViewById(R.id.tvTempo);
 
         }
     }

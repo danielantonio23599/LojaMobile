@@ -1,29 +1,29 @@
 package com.daniel.lojamobile.fragment;
 
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.GridView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.daniel.lojamobile.ProdutoActivity;
 import com.daniel.lojamobile.R;
-import com.daniel.lojamobile.adapter.AdapterMesa;
-import com.daniel.lojamobile.adapter.holder.Venda;
+import com.daniel.lojamobile.adapter.AdapterDespesa;
+import com.daniel.lojamobile.modelo.beans.Despesa;
 import com.daniel.lojamobile.modelo.beans.Empresa;
+
 import com.daniel.lojamobile.modelo.persistencia.BdEmpresa;
 import com.daniel.lojamobile.sync.LojaAPI;
 import com.daniel.lojamobile.sync.SyncDefaut;
-
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -31,17 +31,23 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class MesasFragment extends Fragment implements AdapterView.OnItemClickListener {
-    private GridView listView;
+public class DespesaFragment extends Fragment implements AdapterView.OnItemClickListener {
+    private ListView listView;
     private AlertDialog alerta;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragmente_mesas, container, false);
-        //listView = (GridView) view.findViewById(R.id.lvMesas);
-        buscarMesas();
+        View view = inflater.inflate(R.layout.fragment_despesa, container, false);
+        listView = (ListView) view.findViewById(R.id.lvDespesa);
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        mostraDialog();
+       listarDespesas();
+        super.onResume();
     }
 
     private void mostraDialog() {
@@ -52,7 +58,7 @@ public class MesasFragment extends Fragment implements AdapterView.OnItemClickLi
                 //inflamos o layout alerta.xml na view
                 View view = li.inflate(R.layout.alert_progress, null);
                 TextView tvDesc = (TextView) view.findViewById(R.id.tvDesc);    //definimos para o botão do layout um clickListener
-                tvDesc.setText("Buscando pedios Pendentes...");
+                tvDesc.setText("Fazendo comunicação com o servidor...");
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle("Aguarde...");
                 builder.setView(view);
@@ -76,59 +82,22 @@ public class MesasFragment extends Fragment implements AdapterView.OnItemClickLi
 
     }
 
-    private void buscarMesas() {
-        mostraDialog();
-        BdEmpresa bd = new BdEmpresa(getActivity());
-        Empresa sh = bd.listar();
-        bd.close();
-        LojaAPI api = SyncDefaut.RETROFIT_LOJA(getContext()).create(LojaAPI.class);
-        final Call<ArrayList<Venda>> call = api.getVendasAbertas(sh.getEmpEmail(), sh.getEmpSenha());
-        call.enqueue(new Callback<ArrayList<Venda>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Venda>> call, Response<ArrayList<Venda>> response) {
-                if (response.isSuccessful()) {
-                    String auth = response.headers().get("auth");
-                    if (auth.equals("1")) {
-                        Log.i("[IFMG]", "login correto");
-                        ArrayList<Venda> u = response.body();
-                        atualizaTabela(u);
-                    } else {
-                        Log.i("[IFMG]", "login incorreto");
-                        escondeDialog();
-                        // senha ou usuario incorreto
-
-                    }
-                } else {
-                    Log.i("[IFMG]", "servidor fora do ar");
-                    escondeDialog();
-
-                    //servidor fora do ar
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<Venda>> call, Throwable t) {
-                Log.i("[IFMG]", "servidor com erro " + t.getMessage());
-                escondeDialog();
-            }
-        });
-    }
 
 
-    public void atualizaTabela(ArrayList<Venda> vendas) {
-        Log.i("[IFMG]", "mesas : " + vendas.size());
-        AdapterMesa s = new AdapterMesa(getActivity());
-        if (vendas.size() > 0) {
-            s.setLin(vendas);
+    public void atualizaTabela(ArrayList<Despesa> despesa) {
+        Log.i("[IFMG]", "mesas : " + despesa.size());
+        AdapterDespesa s = new AdapterDespesa(getActivity());
+        if (despesa.size() > 0) {
+            s.setLin(despesa);
             listView.setAdapter(s);
-            listView.setOnItemClickListener(MesasFragment.this);
+            listView.setOnItemClickListener(DespesaFragment.this);
         } else {
-            s.setLin(vendas);
+            s.setLin(despesa);
             listView.setAdapter(s);
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(getActivity(), "nenhuma mesa nova!! ", Toast.LENGTH_SHORT);
+                    Toast.makeText(getActivity(), "nenhuma despesa nova!! ", Toast.LENGTH_SHORT);
                 }
             });
 
@@ -138,10 +107,43 @@ public class MesasFragment extends Fragment implements AdapterView.OnItemClickLi
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        AdapterMesa p = (AdapterMesa) parent.getAdapter();
-        Intent intent = new Intent(getActivity(), ProdutoActivity.class);
-        intent.putExtra("venda", p.getLin().get(position).getCodigo());
-        startActivity(intent);
+    }
+
+    private void listarDespesas() {
+        BdEmpresa bd = new BdEmpresa(getActivity());
+        Empresa sh = bd.listar();
+        bd.close();
+        LojaAPI api = SyncDefaut.RETROFIT_LOJA(getContext()).create(LojaAPI.class);
+        final Call<ArrayList<Despesa>> call = api.listarDespesas(sh.getEmpEmail(), sh.getEmpSenha());
+        call.enqueue(new Callback<ArrayList<Despesa>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Despesa>> call, Response<ArrayList<Despesa>> response) {
+                System.out.println(response.isSuccessful());
+                if (response.isSuccessful()) {
+                    String auth = response.headers().get("auth");
+                    if (auth.equals("1")) {
+
+                        ArrayList<Despesa> u = response.body();
+                        escondeDialog();
+                      atualizaTabela(u);
+
+
+                    } else {
+                        escondeDialog();
+                        // senha ou usuario incorreto
+
+                    }
+                } else {
+                    escondeDialog();
+                    //servidor fora do ar
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Despesa>> call, Throwable t) {
+                escondeDialog();
+            }
+        });
 
     }
 }

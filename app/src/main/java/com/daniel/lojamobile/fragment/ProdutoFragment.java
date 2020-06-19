@@ -39,7 +39,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProdutoFragment extends Fragment {
-    private int venda;
+    private int venda = 0;
     private RecyclerView recyclerView;
     private AdapterProduto adapter;
     private ArrayList<Produto> produtos;
@@ -117,19 +117,23 @@ public class ProdutoFragment extends Fragment {
     }
 
     private void onItemClick(final ArrayList<Produto> produtos) {
+
         adapter = new AdapterProduto(getActivity(), produtos, new CustomItemClickListener() {
             @Override
             public void onItemClick(Produto produto, int position) {
-                if (vendaFragment == null) {
-                    vendaFragment = new VendaFragment();
+                if (venda != 0) {
+                    if (vendaFragment == null) {
+                        vendaFragment = new VendaFragment();
+                    }
+                    PedidoBEAN i = getDadosPedido(produto);
+                    vendaFragment.setVenda(venda);
+                    vendaFragment.addItem(i);
+                    replaceFragment(vendaFragment);
+                    //   Toast.makeText(getActivity(), "" + user.getNome(), Toast.LENGTH_SHORT).show();
                 }
-                PedidoBEAN i = getDadosPedido(produto);
-                vendaFragment.setVenda(venda);
-                vendaFragment.addItem(i);
-                replaceFragment(vendaFragment);
-                //   Toast.makeText(getActivity(), "" + user.getNome(), Toast.LENGTH_SHORT).show();
             }
         });
+
         recyclerView.setAdapter(adapter);
     }
 
@@ -162,12 +166,9 @@ public class ProdutoFragment extends Fragment {
     }
 
     private void escondeDialog() {
-
         if (alerta.isShowing()) {
             alerta.dismiss();
         }
-
-
     }
 
     @Override
@@ -196,7 +197,7 @@ public class ProdutoFragment extends Fragment {
     }
 
     public void replaceFragment(Fragment fragment) {
-       //getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        //getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment, "IFMG").addToBackStack(null).commit();
     }
 }

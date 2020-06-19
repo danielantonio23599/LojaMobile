@@ -33,30 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/buenard"
-                android:hint="Motivo"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                app:boxStrokeColor="@color/colorText"
-                app:boxStrokeWidthFocused="1dp"
-                app:counterTextColor="@color/colorText"
-                app:errorEnabled="true"
-                app:errorIconDrawable="@android:drawable/ic_dialog_info"
-                app:errorTextColor="@color/color_red"
-                app:hintTextColor="@color/colorText">
-
-                <EditText
-                    android:id="@+id/etMotivo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                     />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/buenard"
-                android:hint="Quantidade"
+                android:hint="Valor Inicial do Caixa"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 app:boxStrokeColor="@color/colorText"
@@ -69,7 +46,7 @@
 >
 
                 <EditText
-                    android:id="@+id/etQTD"
+                    android:id="@+id/etValor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"

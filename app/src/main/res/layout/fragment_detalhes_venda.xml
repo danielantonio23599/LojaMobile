@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="0.2"
+            android:layout_height="0dp"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/buenard"
+                    android:hint="Venda"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    app:boxStrokeColor="@color/colorText"
+                    app:boxStrokeWidthFocused="1dp"
+                    app:counterTextColor="@color/colorText"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@android:drawable/ic_dialog_info"
+                    app:errorTextColor="@color/color_red"
+                    app:hintTextColor="@color/colorText">
+
+                    <EditText
+                        android:id="@+id/input_venda"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/alike"
+                        android:inputType="textAutoComplete|textEmailAddress"
+                        android:text="1"
+                        android:textSize="16sp" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/buenard"
+                    android:hint="Cliente"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    app:boxStrokeColor="@color/colorText"
+                    app:boxStrokeWidthFocused="1dp"
+                    app:counterTextColor="@color/colorText"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@android:drawable/ic_dialog_info"
+                    app:errorTextColor="@color/color_red"
+                    app:hintTextColor="@color/colorText">
+
+                    <EditText
+                        android:id="@+id/input_cliente"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/alike"
+                        android:inputType="textAutoComplete|textEmailAddress"
+                        android:text=""
+                        android:textSize="16sp" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/lvProdutos"
+            android:layout_width="match_parent"
+            android:layout_weight="0.6"
+            android:layout_height="0dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="0.1"
+            android:layout_height="0dp"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5">
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/buenard"
+                    android:hint="Desconto"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    app:boxStrokeColor="@color/colorText"
+                    app:boxStrokeWidthFocused="1dp"
+                    app:counterTextColor="@color/colorText"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@android:drawable/ic_dialog_info"
+                    app:errorTextColor="@color/color_red"
+                    app:hintTextColor="@color/colorText">
+
+                    <EditText
+                        android:id="@+id/input_desconto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/alike"
+                        android:inputType="textAutoComplete|textEmailAddress"
+                        android:text="1"
+                        android:textSize="16sp" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5">
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/buenard"
+                    android:hint="Frete"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    app:boxStrokeColor="@color/colorText"
+                    app:boxStrokeWidthFocused="1dp"
+                    app:counterTextColor="@color/colorText"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@android:drawable/ic_dialog_info"
+                    app:errorTextColor="@color/color_red"
+                    app:hintTextColor="@color/colorText">
+
+                    <EditText
+                        android:id="@+id/input_Frete"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/alike"
+                        android:inputType="textAutoComplete|textEmailAddress"
+                        android:text="1"
+                        android:textSize="16sp" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="0.1"
+            android:layout_height="0dp"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5">
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/buenard"
+                    android:hint="Devolução"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    app:boxStrokeColor="@color/colorText"
+                    app:boxStrokeWidthFocused="1dp"
+                    app:counterTextColor="@color/colorText"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@android:drawable/ic_dialog_info"
+                    app:errorTextColor="@color/color_red"
+                    app:hintTextColor="@color/colorText">
+
+                    <EditText
+                        android:id="@+id/input_devolucao"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/alike"
+                        android:inputType="textAutoComplete|textEmailAddress"
+                        android:text="1"
+                        android:textSize="16sp" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5">
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/buenard"
+                    android:hint="Valor Final"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    app:boxStrokeColor="@color/colorText"
+                    app:boxStrokeWidthFocused="1dp"
+                    app:counterTextColor="@color/colorText"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@android:drawable/ic_dialog_info"
+                    app:errorTextColor="@color/color_red"
+                    app:hintTextColor="@color/colorText">
+
+                    <EditText
+                        android:id="@+id/input_valor_final"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/alike"
+                        android:inputType="textAutoComplete|textEmailAddress"
+                        android:text="1"
+                        android:textSize="16sp" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </FrameLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,9 +22,10 @@
     <string name="menu_caixa_abrir">Abrir Caixa</string>
     <string name="menu_caixa_fechar">Fechar Caixa</string>
     <string name="menu_caixa_despesas">Despesas Caixa</string>
-    <string name="menu_caixa_sangria">Sangria Caixa</string>
-    <string name="menu_caixa_movimentacoes">Movimentações Caixa</string>
-    <string name="menu_caixa_relatorio">Gerar Relátorio Caixa</string>
+    <string name="menu_servico">Ordem de Serviços</string>
+    <string name="menu_add_servico">Aicionar OS</string>
+    <string name="menu_listar_servico">OS do Hoje</string>
+    <string name="menu_listar_servico_realizados">Listar OSs</string>
     <string name="fragment_relatar_add_foto_text">Adicionar Foto</string>
     <string name="CODIGO">codigo</string>
     <string name="EMAIL">email</string>

@@ -164,12 +164,11 @@ public class VendaFragment extends Fragment implements AdapterView.OnItemClickLi
                         if (sucesso.equals("Sucesso")) {
                             escondeDialog();
                             Toast.makeText(getActivity(), "Pedidos enviados com sucesso!!", Toast.LENGTH_LONG).show();
-                            //getActivity().finish();
+                            onDestroy();
                         } else {
                             Log.i("[IFMG]", "Algo errado");
                             escondeDialog();
                             Toast.makeText(getActivity(), sucesso, Toast.LENGTH_LONG).show();
-                           // getActivity().finish();
                         }
 
                     } else {

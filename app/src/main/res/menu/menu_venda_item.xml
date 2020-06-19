@@ -7,4 +7,9 @@
         android:orderInCategory="100"
         android:title="Adicionar Cliente"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_venda"
+        android:orderInCategory="100"
+        android:title="Detalhes da Venda"
+        app:showAsAction="never" />
 </menu>
