@@ -9,8 +9,21 @@ public class Data {
 
     public static String getDataUS() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Data date = new Data();
-        return dateFormat.format(date);
+        Date data = new Date();
+
+        Calendar  cal = Calendar.getInstance();
+        cal.setTime(data);
+        Date data_atual = cal.getTime();
+        return dateFormat.format(data_atual);
+    }
+    public static String getDataBR() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date data = new Date();
+
+        Calendar  cal = Calendar.getInstance();
+        cal.setTime(data);
+        Date data_atual = cal.getTime();
+        return dateFormat.format(data_atual);
     }
 
     public static String formataDataBR(String dataUS) {

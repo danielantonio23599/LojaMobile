@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_grey">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="5dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="0dp">
+
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+               android:id="@+id/lay_nome"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:fontFamily="@font/buenard"
+                android:hint="Nome"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                app:boxStrokeColor="@color/colorText"
+                app:boxStrokeWidthFocused="1dp"
+                app:counterTextColor="@color/colorText"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@drawable/alerta"
+                app:errorTextColor="@color/color_red"
+                app:hintTextColor="@color/colorText">
+
+                <EditText
+                    android:id="@+id/input_nome"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/alike"
+                    android:inputType="textPostalAddress"
+                    android:text=""
+                    android:textSize="24sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/lay_descricao"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:fontFamily="@font/buenard"
+                android:hint="Descrição"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                app:boxStrokeColor="@color/colorText"
+                app:boxStrokeWidthFocused="1dp"
+                app:counterTextColor="@color/colorText"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@drawable/alerta"
+                app:errorTextColor="@color/color_red"
+                app:hintTextColor="@color/colorText">
+
+                <EditText
+                    android:id="@+id/input_descricao"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/alike"
+                    android:inputType="textPostalAddress"
+                    android:text=""
+                    android:textSize="24sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/lay_endereco"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:fontFamily="@font/buenard"
+                android:hint="Endereço"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                app:boxStrokeColor="@color/colorText"
+                app:boxStrokeWidthFocused="1dp"
+                app:counterTextColor="@color/colorText"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@drawable/alerta"
+                app:errorTextColor="@color/color_red"
+                app:hintTextColor="@color/colorText">
+
+                <EditText
+                    android:id="@+id/input_endereco"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/alike"
+                    android:inputType="textPostalAddress"
+                    android:text=""
+                    android:textSize="24sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/lay_valor"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:fontFamily="@font/buenard"
+                android:hint="Valor"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                app:boxStrokeColor="@color/colorText"
+                app:boxStrokeWidthFocused="1dp"
+                app:counterTextColor="@color/colorText"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@drawable/alerta"
+                app:errorTextColor="@color/color_red"
+                app:hintTextColor="@color/colorText">
+
+                <EditText
+                    android:id="@+id/input_valor"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/alike"
+                    android:inputType="numberDecimal"
+                    android:text=""
+                    android:textSize="24sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/lay_data"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:fontFamily="@font/buenard"
+                android:hint="Data"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                app:boxStrokeColor="@color/colorText"
+                app:boxStrokeWidthFocused="1dp"
+                app:counterTextColor="@color/colorText"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@drawable/alerta"
+                app:errorTextColor="@color/color_red"
+                app:hintTextColor="@color/colorText">
+
+                <EditText
+                    android:id="@+id/input_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:fontFamily="@font/alike"
+                    android:inputType="date"
+                    android:textSize="24sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/lay_hora"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:fontFamily="@font/buenard"
+                android:hint="Hora"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                app:boxStrokeColor="@color/colorText"
+                app:boxStrokeWidthFocused="1dp"
+                app:counterTextColor="@color/colorText"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@drawable/alerta"
+                app:errorTextColor="@color/color_red"
+                app:hintTextColor="@color/colorText">
+
+                <EditText
+                    android:id="@+id/input_hora"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/alike"
+                    android:inputType="datetime"
+                    android:text=""
+                    android:textSize="24sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/lay_funcionario"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:fontFamily="@font/buenard"
+                android:hint="Funcionario"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                app:boxStrokeColor="@color/colorText"
+                app:boxStrokeWidthFocused="1dp"
+                app:counterTextColor="@color/colorText"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@drawable/alerta"
+                app:errorTextColor="@color/color_red"
+                app:hintTextColor="@color/colorText">
+
+                <EditText
+                    android:id="@+id/input_funcionario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:fontFamily="@font/alike"
+                    android:inputType="textPostalAddress"
+                    android:text=""
+                    android:textSize="24sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageButton
+                android:id="@+id/btnFuncionario"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="12dp"
+                android:layout_weight="0.2"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                card_view:srcCompat="@drawable/ic_add" />
+
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/spinner_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/lista_status"
+                android:prompt="@string/status_prompt"  />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

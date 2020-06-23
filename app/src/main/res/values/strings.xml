@@ -32,4 +32,11 @@
     <string name="SENHA">senha</string>
     <string name="FANTAZIA">fantazia</string>
     <string name="home_second">Home Second</string>
+    <string name="status_prompt">Escolha um Status</string>
+    <string-array name="lista_status">
+        <item>Adicionado</item>
+        <item>Em_Trabalho</item>
+        <item>Aguardado pagamento</item>
+        <item>Finalizado</item>
+    </string-array>
 </resources>

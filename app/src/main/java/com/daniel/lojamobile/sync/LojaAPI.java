@@ -6,6 +6,7 @@ import com.daniel.lojamobile.adapter.holder.ProdutosGravados;
 import com.daniel.lojamobile.adapter.holder.Venda;
 import com.daniel.lojamobile.modelo.beans.Despesa;
 import com.daniel.lojamobile.modelo.beans.Empresa;
+import com.daniel.lojamobile.modelo.beans.Funcionario;
 import com.daniel.lojamobile.modelo.beans.Produto;
 import com.daniel.lojamobile.modelo.beans.Usuario;
 
@@ -51,6 +52,10 @@ public interface LojaAPI {
     @FormUrlEncoded
     @POST("loja_server/AlterarPedido")
     Call<ArrayList<Pedido>> alterarPedido(@Field("nomeUsuario") String nomeUsuario, @Field("senha") String senha, @Field("pedido") String pedido);
+
+    @FormUrlEncoded
+    @POST("loja_server/ListarFuncionarios")
+    Call<ArrayList<Funcionario>> listarFuncionarios(@Field("nomeUsuario") String nomeUsuario, @Field("senha") String senha);
 
     @FormUrlEncoded
     @POST("loja_server/ListarPedidosRealizados")
@@ -111,6 +116,10 @@ public interface LojaAPI {
     @FormUrlEncoded
     @POST("loja_server/RealizarVenda")
     Call<Void> enviarPedidos(@Field("pedido") String pedido, @Field("nomeUsuario") String nomeUsuario, @Field("senha") String senha);
+
+    @FormUrlEncoded
+    @POST("loja_server/AdicionarOS")
+    Call<Void> enviarOS(@Field("os") String pedido, @Field("nomeUsuario") String nomeUsuario, @Field("senha") String senha);
 
 
 }

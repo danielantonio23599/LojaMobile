@@ -22,6 +22,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import com.daniel.lojamobile.fragment.AdicionarOSFragment;
 import com.daniel.lojamobile.fragment.DespesaFragment;
 import com.daniel.lojamobile.fragment.DevolverFragment;
 import com.daniel.lojamobile.fragment.GerarNotaFragment;
@@ -162,7 +163,7 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         } else if (id == R.id.nav_os_hoje) {
             //replaceFragment(new GerarReciboFragment());
         } else if (id == R.id.nav_add_os) {
-            //replaceFragment(new GerarReciboFragment());
+            replaceFragment(new AdicionarOSFragment());
         } else if (id == R.id.nav_oss) {
             //replaceFragment(new GerarReciboFragment());
         }
