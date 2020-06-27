@@ -8,10 +8,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.daniel.lojamobile.R;
 import com.daniel.lojamobile.adapter.AdapterProduto;
 import com.daniel.lojamobile.fragment.ProdutoFragment;
 import com.daniel.lojamobile.modelo.beans.Produto;

@@ -1,20 +1,15 @@
 package com.daniel.lojamobile.adapter;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -22,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.daniel.lojamobile.R;
 import com.daniel.lojamobile.adapter.holder.Venda;
-import com.daniel.lojamobile.adapter.interfaces.CustomItemClickListener;
 import com.daniel.lojamobile.adapter.interfaces.VendaItemClickListener;
 import com.daniel.lojamobile.fragment.ClientesFragment;
 import com.daniel.lojamobile.fragment.DetalhesVendaFragment;

@@ -28,6 +28,8 @@ import com.daniel.lojamobile.fragment.DevolverFragment;
 import com.daniel.lojamobile.fragment.GerarNotaFragment;
 import com.daniel.lojamobile.fragment.GerarReciboFragment;
 import com.daniel.lojamobile.fragment.HomeFragment;
+import com.daniel.lojamobile.fragment.OSFragment;
+import com.daniel.lojamobile.fragment.OSHojeFragment;
 import com.daniel.lojamobile.fragment.ProdutoFragment;
 import com.daniel.lojamobile.fragment.VendasAbertasFragment;
 import com.daniel.lojamobile.fragment.VendasFragment;
@@ -161,11 +163,11 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         }  else if (id == R.id.nav_caixa_despesas) {
             replaceFragment(new DespesaFragment());
         } else if (id == R.id.nav_os_hoje) {
-            //replaceFragment(new GerarReciboFragment());
+            replaceFragment(new OSHojeFragment());
         } else if (id == R.id.nav_add_os) {
             replaceFragment(new AdicionarOSFragment());
         } else if (id == R.id.nav_oss) {
-            //replaceFragment(new GerarReciboFragment());
+            replaceFragment(new OSFragment());
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

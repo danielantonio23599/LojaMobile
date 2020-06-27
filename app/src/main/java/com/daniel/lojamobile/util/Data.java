@@ -45,6 +45,25 @@ public class Data {
         }
         return dataF;
     }
+    public static String formataDataBROS(String dataUS) {
+        String dataF = "";
+        if (!dataUS.equals("")) {
+            if (!dataUS.equals("  -  -    ")) {
+                try {
+                    SimpleDateFormat formatoDataBanco = new SimpleDateFormat("yyyy-MM-dd");
+                    Date dataBanco = formatoDataBanco.parse(dataUS);
+                    SimpleDateFormat formatoRetorno = new SimpleDateFormat("dd-MM");
+                    dataF = formatoRetorno.format(dataBanco);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            return "";
+        }
+        return dataF;
+    }
 
     public static String formataDataUS(String dataBR) {
         String dataF = "";

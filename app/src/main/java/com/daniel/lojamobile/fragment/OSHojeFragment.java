@@ -12,24 +12,20 @@ import android.view.ViewGroup;
 import android.widget.SearchView;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.daniel.lojamobile.R;
-import com.daniel.lojamobile.adapter.AdapterProduto;
+import com.daniel.lojamobile.adapter.AdapterOS;
 import com.daniel.lojamobile.adapter.holder.DialogHelper;
-import com.daniel.lojamobile.adapter.holder.PedidoBEAN;
-import com.daniel.lojamobile.adapter.interfaces.CustomItemClickListener;
+import com.daniel.lojamobile.adapter.interfaces.OsItemClickListener;
 import com.daniel.lojamobile.modelo.beans.Empresa;
-import com.daniel.lojamobile.modelo.beans.Produto;
+import com.daniel.lojamobile.modelo.beans.OrdemServico;
 import com.daniel.lojamobile.modelo.persistencia.BdEmpresa;
 import com.daniel.lojamobile.sync.LojaAPI;
 import com.daniel.lojamobile.sync.SyncDefaut;
-import com.daniel.lojamobile.util.Time;
 
 import java.util.ArrayList;
 
@@ -37,38 +33,27 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProdutoFragment extends Fragment {
-    private int venda = 0;
+public class OSHojeFragment extends Fragment {
     private RecyclerView recyclerView;
-    private AdapterProduto adapter;
-    private ArrayList<Produto> produtos;
+    private AdapterOS adapter;
+    private ArrayList<OrdemServico> os;
     private AlertDialog alerta;
-    private VendaFragment vendaFragment = null;
 
-    public void setVendaFragment(VendaFragment vendaFragment) {
-        this.vendaFragment = vendaFragment;
-    }
-
-    public void setVenda(int venda) {
-        this.venda = venda;
-    }
-
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_produto, container, false);
+        View view = inflater.inflate(R.layout.fragment_os, container, false);
         setHasOptionsMenu(true);
-        recyclerView = (RecyclerView) view.findViewById(R.id.rvProduto);
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 1);
+
+        recyclerView = (RecyclerView) view.findViewById(R.id.rvOS);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 3);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
         return view;
     }
 
     @Override
     public void onResume() {
-        getActivity().setTitle("Produtos");
+        getActivity().setTitle("OS");
         getUserListFromRestApi();
         super.onResume();
     }
@@ -79,16 +64,16 @@ public class ProdutoFragment extends Fragment {
         Empresa sh = bd.listar();
         bd.close();
         LojaAPI api = SyncDefaut.RETROFIT_LOJA(getActivity()).create(LojaAPI.class);
-        final Call<ArrayList<Produto>> call = api.listarProdutos(sh.getEmpEmail(), sh.getEmpSenha());
-        call.enqueue(new Callback<ArrayList<Produto>>() {
+        final Call<ArrayList<OrdemServico>> call = api.listarOSHoje(sh.getEmpEmail(), sh.getEmpSenha());
+        call.enqueue(new Callback<ArrayList<OrdemServico>>() {
             @Override
-            public void onResponse(Call<ArrayList<Produto>> call, Response<ArrayList<Produto>> response) {
+            public void onResponse(Call<ArrayList<OrdemServico>> call, Response<ArrayList<OrdemServico>> response) {
                 if (response.isSuccessful()) {
                     String auth = response.headers().get("auth");
                     if (auth.equals("1")) {
                         escondeDialog();
-                        produtos = new ArrayList<>(response.body());
-                        onItemClick(produtos);
+                        os = new ArrayList<>(response.body());
+                        onItemClick(os);
 
                     } else {
                         Log.i("[IFMG]", "login incorreto");
@@ -106,7 +91,7 @@ public class ProdutoFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ArrayList<Produto>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<OrdemServico>> call, Throwable t) {
                 escondeDialog();
                 DialogHelper.getAlertWithMessage("Hata", t.getMessage(), getActivity());
             }
@@ -115,36 +100,18 @@ public class ProdutoFragment extends Fragment {
 
     }
 
-    private void onItemClick(final ArrayList<Produto> produtos) {
+    private void onItemClick(final ArrayList<OrdemServico> os) {
 
-        adapter = new AdapterProduto(getActivity(), produtos, new CustomItemClickListener() {
+        adapter = new AdapterOS(getActivity(), os, new OsItemClickListener() {
             @Override
-            public void onItemClick(Produto produto, int position) {
-                if (venda != 0) {
-                    if (vendaFragment == null) {
-                        vendaFragment = new VendaFragment();
-                    }
-                    PedidoBEAN i = getDadosPedido(produto);
-                    vendaFragment.setVenda(venda);
-                    vendaFragment.addItem(i);
-                    replaceFragment(vendaFragment);
-                    //   Toast.makeText(getActivity(), "" + user.getNome(), Toast.LENGTH_SHORT).show();
-                }
+            public void onItemClick(OrdemServico os, int position) {
+               //TODO
             }
         });
 
         recyclerView.setAdapter(adapter);
     }
 
-    private PedidoBEAN getDadosPedido(Produto produto) {
-        PedidoBEAN p = new PedidoBEAN();
-        p.setTime(Time.getTime());
-        p.setProNome(produto.getNome());
-        p.setProduto(produto.getCodigo());
-        p.setValor(produto.getPreco());
-        p.setVenda(venda);
-        return p;
-    }
 
 
     private void mostraDialog() {
@@ -193,10 +160,5 @@ public class ProdutoFragment extends Fragment {
 
         });
         super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    public void replaceFragment(Fragment fragment) {
-        //getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment, "IFMG").addToBackStack(null).commit();
     }
 }
