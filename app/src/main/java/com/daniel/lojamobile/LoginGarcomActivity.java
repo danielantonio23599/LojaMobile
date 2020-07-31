@@ -42,22 +42,22 @@ public class LoginGarcomActivity extends AppCompatActivity {
 
     private EditText userEmail, user_pwd;
     private Button buttonLogin;
-    private ImageButton buttonConf;
     private AlertDialog alerta;
     private AlertDialog alerta2;
     private TextView tvSign_up;
     EditText ip;
 
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //settings.setUserLogOff(getBaseContext());
         //mostraDialog();
+        getWindow().setStatusBarColor(R.color.colorPrimary);
         setContentView(R.layout.activity_login_garcom);
         userEmail = (EditText) findViewById(R.id.input_email);
         user_pwd = (EditText) findViewById(R.id.input_senha);
         buttonLogin = (Button) findViewById(R.id.btnLogin);
-        buttonConf = (ImageButton) findViewById(R.id.btnConf);
         tvSign_up = (TextView) findViewById(R.id.tvSign_up);
         //todo validar todas as permissões de uma vez aqui
 
@@ -71,12 +71,6 @@ public class LoginGarcomActivity extends AppCompatActivity {
 
             }
         });
-        buttonConf.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showConfg();
-            }
-        });
         tvSign_up.setOnClickListener(new View.OnClickListener() {
 
             @SuppressLint("ResourceAsColor")
@@ -84,7 +78,7 @@ public class LoginGarcomActivity extends AppCompatActivity {
             public void onClick(View v) {
                 tvSign_up.setPaintFlags(tvSign_up.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                 tvSign_up.setTextColor(Color.BLUE);
-               // mudaActivity(CadastroActivity.class);
+               mudaActivity(Cadastro2Activity.class);
 
             }
         });
@@ -105,7 +99,7 @@ public class LoginGarcomActivity extends AppCompatActivity {
         Log.i("[IFMG]", "faz login");
         mostraDialog();
 
-        LojaAPI api = SyncDefaut.RETROFIT_LOJA(getApplicationContext()).create(LojaAPI.class);
+        LojaAPI api = SyncDefaut.RETROFIT_LOJA().create(LojaAPI.class);
 
         final Call<Usuario> call = api.fazLogin(nomeUsuario, Criptografia.criptografar(senha));
 

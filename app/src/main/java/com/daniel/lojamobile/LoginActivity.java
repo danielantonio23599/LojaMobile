@@ -1,7 +1,9 @@
 package com.daniel.lojamobile;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -37,22 +40,22 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText userEmail, user_pwd;
     private Button buttonLogin;
-    private ImageButton buttonConf;
     private AlertDialog alerta;
     private AlertDialog alerta2;
     EditText ip;
 
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //settings.setUserLogOff(getBaseContext());
         //mostraDialog();
+        getWindow().setStatusBarColor(R.color.colorPrimaryDark);
         setContentView(R.layout.activity_login);
 
         userEmail = (EditText) findViewById(R.id.input_email);
         user_pwd = (EditText) findViewById(R.id.input_senha);
         buttonLogin = (Button) findViewById(R.id.btnLogin);
-        buttonConf = (ImageButton) findViewById(R.id.btnConf);
         //todo validar todas as permissões de uma vez aqui
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
@@ -63,12 +66,6 @@ public class LoginActivity extends AppCompatActivity {
                 //Com MD5: -> Cadastrar Adm com MD5
 //                fazLogin(userName.getText() + "", StringUtils.md5(user_pwd.getText() + ""));
 
-            }
-        });
-        buttonConf.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showConfg();
             }
         });
 
@@ -87,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
     public void fazLogin(String nomeUsuario, String senha) {
         Log.i("[IFMG]", "faz login");
         mostraDialog();
-        LojaAPI api = SyncDefaut.RETROFIT_LOJA(getApplicationContext()).create(LojaAPI.class);
+        LojaAPI api = SyncDefaut.RETROFIT_LOJA().create(LojaAPI.class);
         final Call<Empresa> call = api.fazLoginEmpresa(nomeUsuario, Criptografia.criptografar(senha));
         call.enqueue(new Callback<Empresa>() {
             @Override
@@ -124,9 +121,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Empresa> call, Throwable t) {
                 escondeDialog();
-                Toast.makeText(getBaseContext(), "Erro ao fazer login, falhaaaaa", Toast.LENGTH_SHORT).show();
-                Log.i("[IFMG]", "faz login");
+                Toast.makeText(getBaseContext(), "Erro ao acessar servidor", Toast.LENGTH_SHORT).show();
                 Log.i("[IFMG]", "t2: " + t.getMessage());
+                Log.i("[IFMG]", "t2: " + t.getLocalizedMessage());
                 //mudaActivity(MainActivity.class);
             }
         });

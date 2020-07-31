@@ -13,41 +13,39 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/buenard"
         android:paddingLeft="8dp"
-        android:text="Qual o seu numero de celular?"
+        android:text="Qual a sua data de nascimento?"
         android:textColor="@color/colorText"
         android:textSize="24sp" />
 
     <FrameLayout
+        android:paddingHorizontal="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingHorizontal="10dp"
         android:paddingTop="25dp">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layTelefone"
+            android:id="@+id/lay_data"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/buenard"
-            android:hint="Telefone celular"
+            android:hint="Data de Nascimento"
             app:boxStrokeColor="@color/colorAccent"
             app:boxStrokeWidthFocused="1dp"
             app:counterTextColor="@color/colorAccent"
             app:errorEnabled="true"
-            app:errorIconDrawable="@drawable/alerta"
+            app:errorIconDrawable="@android:drawable/ic_dialog_info"
             app:errorTextColor="@color/color_red"
-            app:helperText="Informações sobre os pedidos serão enviadas para o este celular via sms"
-            app:hintEnabled="true"
             app:hintTextColor="@color/colorAccent">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/input_telefone"
+                android:id="@+id/input_data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:focusable="true"
-                android:hint="(00)00000-0000"
-                android:inputType="phone"
-                android:selectAllOnFocus="true"
+                android:fontFamily="@font/buenard"
+                android:maxLength="10"
+                android:hint=""
+                android:inputType="number"
                 android:textSize="20sp" />
 
         </com.google.android.material.textfield.TextInputLayout>

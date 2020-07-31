@@ -108,7 +108,7 @@ public class VendasAbertasFragment extends Fragment {
         Log.i("[IFMG]", "abrir venda ");
         mostraDialog();
         SharedPreferences sh = PreferencesSettings.getAllPreferences(getContext());
-        LojaAPI api = SyncDefaut.RETROFIT_LOJA(getContext()).create(LojaAPI.class);
+        LojaAPI api = SyncDefaut.RETROFIT_LOJA().create(LojaAPI.class);
         final Call<Void> call = api.abrirVenda(sh.getEmail(), sh.getSenha());
         call.enqueue(new Callback<Void>() {
             @Override
@@ -159,25 +159,18 @@ public class VendasAbertasFragment extends Fragment {
         BdEmpresa bd = new BdEmpresa(getActivity());
         Empresa sh = bd.listar();
         bd.close();
-        LojaAPI api = SyncDefaut.RETROFIT_LOJA(getContext()).create(LojaAPI.class);
+        LojaAPI api = SyncDefaut.RETROFIT_LOJA().create(LojaAPI.class);
         final Call<ArrayList<Venda>> call = api.getVendasAbertas(sh.getEmpEmail(), sh.getEmpSenha());
         call.enqueue(new Callback<ArrayList<Venda>>() {
             @Override
             public void onResponse(Call<ArrayList<Venda>> call, Response<ArrayList<Venda>> response) {
                 if (response.isSuccessful()) {
                     String auth = response.headers().get("auth");
-                    String sucesso = response.headers().get("sucesso");
                     if (auth.equals("1")) {
-                        if (sucesso.equals("0")) {
-                            escondeDialog();
-                            Toast.makeText(getActivity(), "Caixa está fechado", Toast.LENGTH_LONG).show();
-                        } else {
-                            Log.i("[IFMG]", "login correto");
-                            mesa = new ArrayList<>(response.body());
-                            escondeDialog();
-                            onItemClick(mesa);
-                        }
-
+                        Log.i("[IFMG]", "login correto");
+                        mesa = new ArrayList<>(response.body());
+                        escondeDialog();
+                        onItemClick(mesa);
                     } else {
                         Log.i("[IFMG]", "login incorreto");
                         escondeDialog();
@@ -266,7 +259,7 @@ public class VendasAbertasFragment extends Fragment {
     }
 
     public void replaceFragment(Fragment fragment) {
-         //getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        //getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment, "IFMG").addToBackStack(null).commit();
     }
 }

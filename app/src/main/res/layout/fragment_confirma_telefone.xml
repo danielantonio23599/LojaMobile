@@ -20,7 +20,7 @@
             android:fontFamily="@font/buenard"
             android:paddingLeft="8dp"
             android:text="Digite o código de 5 dígitos que enviamos via sms para "
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorText"
             android:textSize="24sp" />
 
         <LinearLayout

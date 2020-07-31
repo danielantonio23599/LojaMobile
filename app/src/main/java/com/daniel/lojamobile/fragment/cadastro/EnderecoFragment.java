@@ -51,8 +51,52 @@ public class EnderecoFragment extends Fragment {
     public int REQUEST_CHECK_SETTINGS = 1;
     private Button btnCep;
 
-    public EditText getCep() {
-        return cep;
+    public String getLogradouro() {
+        return logradouro.getText().toString();
+    }
+
+    public void setLogradouro(String logradouro) {
+        this.logradouro.setText(logradouro);
+    }
+
+    public String getBairro() {
+        return bairro.getText().toString();
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro.setText(bairro);
+    }
+
+    public String getCidade() {
+        return cidade.getText().toString();
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade.setText(cidade);
+    }
+
+    public String getNumero() {
+        return numero.getText().toString();
+    }
+
+    public void setNumero(String numero) {
+        this.numero.setText(numero);
+    }
+
+    public String getUf() {
+        return uf.getText().toString();
+    }
+
+    public void setUf(String uf) {
+        this.uf.setText(uf);
+    }
+
+    public void setCep(String cep) {
+        this.cep.setText(cep);
+    }
+
+    public String getCep() {
+        return cep.getText().toString();
     }
 
     public LinearLayout getLyEndereco() {

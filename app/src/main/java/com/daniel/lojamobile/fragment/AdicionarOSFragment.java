@@ -275,7 +275,7 @@ public class AdicionarOSFragment extends Fragment implements AdapterView.OnItemC
         BdEmpresa bd = new BdEmpresa(getActivity());
         Empresa sh = bd.listar();
         bd.close();
-        LojaAPI api = SyncDefaut.RETROFIT_LOJA(getContext()).create(LojaAPI.class);
+        LojaAPI api = SyncDefaut.RETROFIT_LOJA().create(LojaAPI.class);
         final Call<Void> call = api.enviarOS(new Gson().toJson(os), sh.getEmpEmail(), sh.getEmpSenha());
         call.enqueue(new Callback<Void>() {
             @Override
@@ -373,7 +373,7 @@ public class AdicionarOSFragment extends Fragment implements AdapterView.OnItemC
         BdEmpresa bd = new BdEmpresa(getActivity());
         Empresa sh = bd.listar();
         bd.close();
-        LojaAPI api = SyncDefaut.RETROFIT_LOJA(getContext()).create(LojaAPI.class);
+        LojaAPI api = SyncDefaut.RETROFIT_LOJA().create(LojaAPI.class);
         final Call<ArrayList<Funcionario>> call = api.listarFuncionarios(sh.getEmpEmail(), sh.getEmpSenha());
         call.enqueue(new Callback<ArrayList<Funcionario>>() {
             @Override

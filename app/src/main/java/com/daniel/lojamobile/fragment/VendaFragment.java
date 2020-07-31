@@ -152,7 +152,7 @@ public class VendaFragment extends Fragment implements AdapterView.OnItemClickLi
         BdEmpresa bd = new BdEmpresa(getActivity());
         Empresa sh = bd.listar();
         bd.close();
-        LojaAPI api = SyncDefaut.RETROFIT_LOJA(getContext()).create(LojaAPI.class);
+        LojaAPI api = SyncDefaut.RETROFIT_LOJA().create(LojaAPI.class);
         final Call<Void> call = api.enviarPedidos(new Gson().toJson(pedidos), sh.getEmpEmail(), sh.getEmpSenha());
         call.enqueue(new Callback<Void>() {
             @Override

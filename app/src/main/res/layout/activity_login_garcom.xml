@@ -1,94 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/splash">
 
 
-    <ImageButton
-        android:id="@+id/btnConf"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_gravity="bottom|right"
-        android:background="@drawable/settings"
-        android:backgroundTint="#000000" />
-
-
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_margin="40dp"
-        android:orientation="vertical">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="40dp">
 
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_layout_nome_usuario"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <androidx.cardview.widget.CardView
+            app:cardCornerRadius="20dp"
+            android:elevation="2dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:textColorHint="@color/design_default_color_background">
+            android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/input_email"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="E-mail Empresa"
-                android:inputType="textEmailAddress"
-                android:text=""
-                android:textColor="@color/design_default_color_on_primary"
-                android:textSize="14sp" />
+                android:layout_height="match_parent"
+                android:background="@color/color_grey_f"
+                android:orientation="vertical">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="40dp">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_layout_senha"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:textColorHint="@color/design_default_color_background"
-            app:passwordToggleEnabled="true">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/input_layout_nome_usuario"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/buenard"
+                        android:hint="Email Garçom"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        app:boxStrokeColor="@color/colorText"
+                        app:boxStrokeWidthFocused="1dp"
+                        app:counterTextColor="@color/colorText"
+                        app:errorEnabled="true"
+                        app:errorIconDrawable="@drawable/alerta"
+                        app:errorTextColor="@color/color_red"
+                        app:hintTextColor="@color/colorText">
 
-            <EditText
-                android:id="@+id/input_senha"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Senha"
-                android:inputType="textPassword"
-                android:text=""
-                android:textColor="@color/design_default_color_on_primary"
-                android:textSize="14sp" />
+                        <EditText
+                            android:id="@+id/input_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textEmailAddress"
+                            android:text=""
+                            android:textColor="@color/colorText"
+                            android:textSize="14sp" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
 
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="165dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="40dp"
-            android:background="@color/colorAccent"
-            android:padding="5dp"
-            android:text="Entrar"
-            android:textColor="@android:color/white" />
+                <LinearLayout
 
-        <TextView
-            android:id="@+id/tvSign_up"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:alpha="0.6"
-            android:gravity="center"
-            android:text="Não possui conta?\nClique aqui para se cadastrar"
-            android:textColor="@color/colorAccent"
-            android:textSize="12sp" />
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/input_layout_senha"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/buenard"
+                        android:hint="Senha"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        app:boxStrokeColor="@color/colorText"
+                        app:boxStrokeWidthFocused="1dp"
+                        app:counterTextColor="@color/colorText"
+                        app:errorEnabled="true"
+                        app:errorIconDrawable="@drawable/alerta"
+                        app:errorTextColor="@color/color_red"
+                        app:hintTextColor="@color/colorText"
+                        app:passwordToggleEnabled="true">
+
+                        <EditText
+                            android:id="@+id/input_senha"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword"
+                            android:text=""
+                            android:textColor="@color/colorText"
+                            android:textSize="14sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnLogin"
+                    android:layout_width="165dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="0dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:padding="5dp"
+                    android:text="Entrar"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/tvSign_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:alpha="0.6"
+                    android:gravity="center"
+                    android:text="Não possui conta?\nClique aqui para se cadastrar"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </FrameLayout>
 
 
-    </LinearLayout>
-
-
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

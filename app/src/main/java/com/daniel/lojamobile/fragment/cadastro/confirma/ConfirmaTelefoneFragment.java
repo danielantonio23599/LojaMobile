@@ -37,6 +37,14 @@ public class ConfirmaTelefoneFragment extends Fragment implements
     private EditText input_4;
     private EditText input_5;
     private TextView tempo;
+    private String codigo;
+
+    public String getCodigo() {
+        codigo = input_1.getText().toString() + input_2.getText().toString() + input_3.getText().toString() + input_4.getText().toString()
+                + input_5.getText().toString();
+        return codigo;
+    }
+
     public static final String TAG = Cadastro2Activity.class.getSimpleName();
 
     private SMSReceiver smsReceiver;
@@ -142,6 +150,14 @@ public class ConfirmaTelefoneFragment extends Fragment implements
         showToast(error);
     }
 
+    public boolean verificaCodigo(String codigo) {
+        if (codigo.equals(getCodigo())) {
+            return true;
+        } else {
+            showToast("Codigo invalido!!");
+            return false;
+        }
+    }
 
     @Override
     public void onDestroy() {
@@ -157,15 +173,16 @@ public class ConfirmaTelefoneFragment extends Fragment implements
     }
 
     private void setDados(String otp) {
-        String n1 = otp.substring(17, 18);
-        String n2 = otp.substring(18, 19);
-        String n3 = otp.substring(19, 20);
-        String n4 = otp.substring(20, 21);
-        String n5 = otp.substring(21, 22);
+        String n1 = otp.substring(16, 17);
+        String n2 = otp.substring(17, 18);
+        String n3 = otp.substring(18, 19);
+        String n4 = otp.substring(19, 20);
+        String n5 = otp.substring(20, 21);
         input_1.setText(n1);
         input_2.setText(n2);
         input_3.setText(n3);
         input_4.setText(n4);
         input_5.setText(n5);
+
     }
 }

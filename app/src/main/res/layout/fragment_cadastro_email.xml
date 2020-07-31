@@ -14,7 +14,7 @@
         android:fontFamily="@font/buenard"
         android:paddingLeft="8dp"
         android:text="Qual o seu e-mail?"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorText"
         android:textSize="24sp" />
 
     <FrameLayout
@@ -24,6 +24,7 @@
         android:paddingTop="25dp">
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/lay_email"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

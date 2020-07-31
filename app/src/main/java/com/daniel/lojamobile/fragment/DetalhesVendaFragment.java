@@ -127,7 +127,7 @@ public class DetalhesVendaFragment extends Fragment implements AdapterView.OnIte
         BdEmpresa bd = new BdEmpresa(getActivity());
         Empresa sh = bd.listar();
         bd.close();
-        LojaAPI api = SyncDefaut.RETROFIT_LOJA(getContext()).create(LojaAPI.class);
+        LojaAPI api = SyncDefaut.RETROFIT_LOJA().create(LojaAPI.class);
         final Call<Venda> call = api.listarVenda(sh.getEmpEmail(), sh.getEmpSenha(), venda + "");
         call.enqueue(new Callback<Venda>() {
             @Override
@@ -208,7 +208,7 @@ public class DetalhesVendaFragment extends Fragment implements AdapterView.OnIte
         BdEmpresa bd = new BdEmpresa(getActivity());
         Empresa sh = bd.listar();
         bd.close();
-        LojaAPI api = SyncDefaut.RETROFIT_LOJA(getContext()).create(LojaAPI.class);
+        LojaAPI api = SyncDefaut.RETROFIT_LOJA().create(LojaAPI.class);
         final Call<ArrayList<ProdutosGravados>> call = api.listarProdutosVenda(sh.getEmpEmail(), sh.getEmpSenha(), venda + "");
         call.enqueue(new Callback<ArrayList<ProdutosGravados>>() {
             @Override
@@ -319,7 +319,7 @@ public class DetalhesVendaFragment extends Fragment implements AdapterView.OnIte
         d.setTime(Time.getTime());
         Log.i("[IFMG]", "faz selveti buscando pedidos pendentes");
         mostraDialog();
-        LojaAPI api = SyncDefaut.RETROFIT_LOJA(getContext()).create(LojaAPI.class);
+        LojaAPI api = SyncDefaut.RETROFIT_LOJA().create(LojaAPI.class);
         SharedPreferences sh = PreferencesSettings.getAllPreferences(getContext());
         final Call<Void> call = api.devolverPedido(new Gson().toJson(d), p.getCodPedidVenda() + "", sh.getEmail(), sh.getSenha());
         call.enqueue(new Callback<Void>() {

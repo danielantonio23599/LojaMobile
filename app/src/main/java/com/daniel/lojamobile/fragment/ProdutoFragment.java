@@ -78,7 +78,7 @@ public class ProdutoFragment extends Fragment {
         BdEmpresa bd = new BdEmpresa(getActivity());
         Empresa sh = bd.listar();
         bd.close();
-        LojaAPI api = SyncDefaut.RETROFIT_LOJA(getActivity()).create(LojaAPI.class);
+        LojaAPI api = SyncDefaut.RETROFIT_LOJA().create(LojaAPI.class);
         final Call<ArrayList<Produto>> call = api.listarProdutos(sh.getEmpEmail(), sh.getEmpSenha());
         call.enqueue(new Callback<ArrayList<Produto>>() {
             @Override
@@ -86,29 +86,28 @@ public class ProdutoFragment extends Fragment {
                 if (response.isSuccessful()) {
                     String auth = response.headers().get("auth");
                     if (auth.equals("1")) {
+
                         escondeDialog();
                         produtos = new ArrayList<>(response.body());
                         onItemClick(produtos);
-
+                        Log.i("[IFMG]", "produtos size "+produtos.size() );
                     } else {
                         Log.i("[IFMG]", "login incorreto");
                         escondeDialog();
                         // senha ou usuario incorreto
-
                     }
                 } else {
                     Log.i("[IFMG]", "servidor fora do ar");
                     escondeDialog();
                     //servidor fora do ar
                 }
-
-
             }
 
             @Override
             public void onFailure(Call<ArrayList<Produto>> call, Throwable t) {
                 escondeDialog();
-                DialogHelper.getAlertWithMessage("Hata", t.getMessage(), getActivity());
+                Log.i("[IFMG]", t.getMessage());
+                //   DialogHelper.getAlertWithMessage("Hata", t.getMessage(), getActivity());
             }
         });
 
@@ -153,7 +152,7 @@ public class ProdutoFragment extends Fragment {
         //inflamos o layout alerta.xml na view
         View view = li.inflate(R.layout.alert_progress, null);
         TextView tvDesc = (TextView) view.findViewById(R.id.tvDesc);    //definimos para o botão do layout um clickListener
-        tvDesc.setText("Buscando pedios Pendentes...");
+        tvDesc.setText("Buscando Produtos...");
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Aguarde...");
         builder.setView(view);

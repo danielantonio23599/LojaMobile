@@ -17,13 +17,15 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 
 public interface LojaAPI {
     // Servlets para testes no servidor local
     @FormUrlEncoded
-    @POST("loja_server/LoginEmpresa")
+    @GET("loja_server/LoginEmpresa")
     Call<Empresa> fazLoginEmpresa(@Field("nomeUsuario") String nomeUsuario, @Field("senha") String senha);
 
     @FormUrlEncoded
@@ -72,7 +74,7 @@ public interface LojaAPI {
 
     @FormUrlEncoded
     @POST("loja_server/AdicionarFuncionario")
-    Call<Void> insereFuncionario(@Field("funcionario") String funcionario, @Field("empresa") String empresa, @Field("senha") String senha);
+    Call<Void> insereFuncionario(@Field("funcionario") String funcionario, @Field("nomeUsuario") String nomeUsuario, @Field("senha") String senha);
 
     @FormUrlEncoded
     @POST("loja_server/ListarProdutosVenda")

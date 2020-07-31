@@ -73,5 +73,13 @@
 
         </menu>
     </item>
+    <item android:title="Login">
+        <menu>
+            <item
+                android:id="@+id/nav_sair"
+                android:title="Sair" />
+
+        </menu>
+    </item>
 
 </menu>

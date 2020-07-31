@@ -173,7 +173,7 @@ public class PerfilActivity extends AppCompatActivity {
 
         Log.i("PASSOU", "Passou 1");
 
-        LojaAPI i = SyncDefaut.RETROFIT_LOJA(getApplicationContext()).create(LojaAPI.class);
+        LojaAPI i = SyncDefaut.RETROFIT_LOJA().create(LojaAPI.class);
         SharedPreferences s = PreferencesSettings.getAllPreferences(getApplicationContext());
         Log.i("IFMG", "Senha: " + u.getSenha());
         final Call<Void> call = i.atualizarFuncionario(new Gson().toJson(u), s.getEmail(), u.getSenha());

@@ -80,7 +80,7 @@ public class ClientesFragment extends Fragment {
         BdEmpresa bd = new BdEmpresa(getActivity());
         Empresa sh = bd.listar();
         bd.close();
-        LojaAPI api = SyncDefaut.RETROFIT_LOJA(getContext()).create(LojaAPI.class);
+        LojaAPI api = SyncDefaut.RETROFIT_LOJA().create(LojaAPI.class);
         final Call<ArrayList<Cliente>> call = api.listarClientes(sh.getEmpEmail(), sh.getEmpSenha());
         call.enqueue(new Callback<ArrayList<Cliente>>() {
             @Override
@@ -191,7 +191,7 @@ public class ClientesFragment extends Fragment {
         BdEmpresa bd = new BdEmpresa(getActivity());
         Empresa sh = bd.listar();
         bd.close();
-        LojaAPI api = SyncDefaut.RETROFIT_LOJA(getContext()).create(LojaAPI.class);
+        LojaAPI api = SyncDefaut.RETROFIT_LOJA().create(LojaAPI.class);
         final Call<Void> call = api.adicionarClienteVenda(sh.getEmpEmail(), sh.getEmpSenha(), venda + "", cliente + "");
         call.enqueue(new Callback<Void>() {
             @Override

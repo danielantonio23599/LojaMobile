@@ -3,11 +3,16 @@ package com.daniel.lojamobile;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -15,17 +20,26 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
 
 import com.daniel.lojamobile.fragment.cadastro.BuscaEnderecoFragment;
+import com.daniel.lojamobile.fragment.cadastro.DataFragment;
 import com.daniel.lojamobile.fragment.cadastro.EmailFragment;
 import com.daniel.lojamobile.fragment.cadastro.EnderecoFragment;
 import com.daniel.lojamobile.fragment.cadastro.FotoFragment;
 import com.daniel.lojamobile.fragment.cadastro.NomeFragment;
+import com.daniel.lojamobile.fragment.cadastro.SenhaFragment;
 import com.daniel.lojamobile.fragment.cadastro.TelefoneFragment;
 import com.daniel.lojamobile.fragment.cadastro.confirma.ConfirmaEmailFragment;
 import com.daniel.lojamobile.fragment.cadastro.confirma.ConfirmaTelefoneFragment;
+import com.daniel.lojamobile.modelo.beans.Empresa;
 import com.daniel.lojamobile.modelo.beans.Endereco;
+import com.daniel.lojamobile.modelo.beans.Funcionario;
+import com.daniel.lojamobile.modelo.persistencia.BdEmpresa;
 import com.daniel.lojamobile.sync.CepAPI;
+import com.daniel.lojamobile.sync.LojaAPI;
 import com.daniel.lojamobile.sync.SyncCEP;
+import com.daniel.lojamobile.sync.SyncDefaut;
+import com.daniel.lojamobile.util.Criptografia;
 import com.daniel.lojamobile.util.PermissionUtils;
+import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,15 +50,17 @@ public class Cadastro2Activity extends AppCompatActivity {
     private ImageButton back;
     private Toolbar toolbar;
     private FragmentContainerView fragment;
-    private NomeFragment n = new NomeFragment();
-    private EmailFragment e = new EmailFragment();
-    private TelefoneFragment t = new TelefoneFragment();
-    private EnderecoFragment end = new EnderecoFragment();
+    private SenhaFragment senha = new SenhaFragment();
+    private NomeFragment nome = new NomeFragment();
+    private DataFragment data = new DataFragment();
+    private EmailFragment email = new EmailFragment();
+    private TelefoneFragment telefone = new TelefoneFragment();
+    private EnderecoFragment enderec = new EnderecoFragment();
     private BuscaEnderecoFragment busca_end = new BuscaEnderecoFragment();
-    private FotoFragment foto = new FotoFragment();
     private ConfirmaEmailFragment conf_email = new ConfirmaEmailFragment();
     private ConfirmaTelefoneFragment conf_tele = new ConfirmaTelefoneFragment();
     private Endereco endereco;
+    private AlertDialog alerta;
 
 
     @Override
@@ -77,31 +93,42 @@ public class Cadastro2Activity extends AppCompatActivity {
         next = (Button) findViewById(R.id.btnNext);
         fragment = (FragmentContainerView) findViewById(R.id.cadastro_fragment);
 
-        replaceFragment(n);
+        replaceFragment(nome);
         next.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("WrongConstant")
             @Override
             public void onClick(View v) {
                 Log.i("IFMG", getSupportFragmentManager().findFragmentById(R.id.cadastro_fragment) + "");
                 Log.i("IFMG", R.layout.fragment_cadastro_nome + "");
-                if (n == (getSupportFragmentManager().findFragmentById(R.id.cadastro_fragment))) {
-                    replaceFragment(e);
-                } else if ((getSupportFragmentManager().findFragmentById(R.id.cadastro_fragment)) == e) {
-                    replaceFragment(t);
-                } else if ((getSupportFragmentManager().findFragmentById(R.id.cadastro_fragment)) == t) {
-                    if (t.verificaTelefone()) {
-                        t.enviarSMS();
+                if (nome == (getSupportFragmentManager().findFragmentById(R.id.cadastro_fragment))) {
+                    if (nome.verificaNome()) {
+                        replaceFragment(data);
+                    }
+
+                } else if (data == (getSupportFragmentManager().findFragmentById(R.id.cadastro_fragment))) {
+                    if (data.verificaData()) {
+                        replaceFragment(email);
+                    }
+                } else if ((getSupportFragmentManager().findFragmentById(R.id.cadastro_fragment)) == email) {
+                    if (email.verificaEmail()) {
+                        replaceFragment(telefone);
+                    }
+                } else if ((getSupportFragmentManager().findFragmentById(R.id.cadastro_fragment)) == telefone) {
+                    if (telefone.verificaTelefone()) {
+                        telefone.enviarSMS();
                         replaceFragment(conf_tele);
                     }
                 } else if ((getSupportFragmentManager().findFragmentById(R.id.cadastro_fragment)) == conf_tele) {
-                    replaceFragment(conf_email);
-                } else if ((getSupportFragmentManager().findFragmentById(R.id.cadastro_fragment)) == conf_email) {
-                    replaceFragment(end);
-                } else if ((getSupportFragmentManager().findFragmentById(R.id.cadastro_fragment)) == end) {
-
-                } /*else if ((getSupportFragmentManager().findFragmentById(R.id.cadastro_fragment)) == foto) {
-                    replaceFragment(end);
-                }*/
+                    if (conf_tele.verificaCodigo(telefone.getCodigo())) {
+                        replaceFragment(enderec);
+                    }
+                } else if ((getSupportFragmentManager().findFragmentById(R.id.cadastro_fragment)) == enderec) {
+                    replaceFragment(senha);
+                } else if ((getSupportFragmentManager().findFragmentById(R.id.cadastro_fragment)) == senha) {
+                    if (senha.verificaSenha()) {
+                        cadastrar();
+                    }
+                }
             }
         });
     }
@@ -112,79 +139,14 @@ public class Cadastro2Activity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.cadastro_fragment, fragment, "cadastro").addToBackStack(null).commit();
     }
 
-  /*  @Override
-    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
-        switch (item.getItemId()) {
-            case android.R.id.home:  //ID do seu botão (gerado automaticamente pelo android, usando como está, deve funcionar
-                if (n != (getSupportFragmentManager().findFragmentById(R.id.cadastro_fragment))) {
-                    getSupportFragmentManager().popBackStack();
-                }
-                break;
-        }
-        return true;
-    }*/
 
     @Override
     public void onBackPressed() {
-        if (n != (getSupportFragmentManager().findFragmentById(R.id.cadastro_fragment))) {
+        if (nome != (getSupportFragmentManager().findFragmentById(R.id.cadastro_fragment))) {
             getSupportFragmentManager().popBackStack();
         }
     }
 
-    /* @SuppressLint("MissingSuperCall")
-     @Override
-     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-         final LocationSettingsStates states = LocationSettingsStates.fromIntent(data);
-         Log.i("IFMG", "entrou");
-         Log.i("IFMG", "requestCode" + requestCode);
-         Log.i("IFMG", "resultCode" + resultCode);
-        // Log.i("IFMG", "states" + states.);
-         switch (requestCode) {
-             case Activity.RESULT_OK:
-                 // Todas as alterações necessárias foram feitas
-                 Log.i("IFMG", "ok");
-                 break;
-             case Activity.RESULT_CANCELED:
-                 // O usuário cancelou o dialog, não fazendo as alterações requeridas
-                 Log.i("IFMG", "falha");
-                 break;
-             default:
-                 break;
-
-         }
-     }*/
-   /* @SuppressLint("MissingSuperCall")
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        final LocationSettingsStates states = LocationSettingsStates.fromIntent(data);
-        if (requestCode == end.REQUEST_CHECK_SETTINGS) {
-            switch (resultCode) {
-                case Activity.RESULT_OK:
-                    // Todas as alterações necessárias foram feitas
-                    final Localizacao lo = new Localizacao(this, this);
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Endereco location = lo.buscaEndereco(end.getEnd());
-                            if (location != null) {
-                                end.setEndereco(location);
-                            } else {
-                                Log.i("IFMG", "lo vasio");
-                            }
-                        }
-                    }).start();
-
-                    break;
-                case Activity.RESULT_CANCELED:
-                    // O usuário cancelou o dialog, não fazendo as alterações requeridas
-                    Log.i("IFMG", "falha");
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-*/
     public Endereco getEnderecoByCEP(String cep) {
         CepAPI api = SyncCEP.RETROFIT_CEP(this).create(CepAPI.class);
 
@@ -207,5 +169,99 @@ public class Cadastro2Activity extends AppCompatActivity {
             }
         });
         return endereco;
+    }
+
+    public void cadastrar() {
+        mostraDialog();
+        BdEmpresa bd = new BdEmpresa(this);
+        final Empresa sh = bd.listar();
+        bd.close();
+        Funcionario f = getDados();
+        LojaAPI api = SyncDefaut.RETROFIT_LOJA().create(LojaAPI.class);
+        Log.i("[IFMG]", sh.getEmpEmail() + sh.getEmpSenha() + "");
+        final Call<Void> call = api.insereFuncionario(new Gson().toJson(f), sh.getEmpEmail(), sh.getEmpSenha());
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Log.i("[IFMG]", response + "");
+                if (response.isSuccessful()) {
+                    String auth = response.headers().get("auth");
+                    if (auth.equals("1")) {
+                        escondeDialog();
+                        String res = response.headers().get("sucesso");
+                        if (res.equals("Funcionario já CADASTRADO!!")) {
+                            email.setEnableErroEmail();
+                            replaceFragment(email);
+                        } else {
+                            showToast(res);
+                            mudaActivity(LoginGarcomActivity.class);
+                        }
+                    } else {
+                        escondeDialog();
+                        showToast("Erro login");
+                    }
+                } else {
+                    escondeDialog();
+                    Log.i("[IFMG]", "erro servidor");
+                    showToast("Erro servidor");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                escondeDialog();
+                Log.i("[IFMG]", "erro servidor onFalure " + t.getMessage());
+                showToast("Erro servidor " + t.getMessage());
+            }
+        });
+    }
+
+    private void mudaActivity(final Class classe) {
+        Log.i("[IFMG]", "passou no muda actyvity" + classe.getName());
+        final Intent intent = new Intent(this, classe);
+        startActivity(intent);
+        finish();
+
+    }
+
+    public void showToast(String msg) {
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+    }
+
+    private Funcionario getDados() {
+        Funcionario f = new Funcionario();
+        f.setDataNacimento(data.getData());
+        f.setNome(nome.getNome());
+        f.setEmail(email.getEmail());
+        f.setTelefone(telefone.getTelefone());
+        f.setBairro(enderec.getBairro());
+        f.setLogradouro(enderec.getLogradouro());
+        f.setCep(enderec.getCep());
+        f.setCidade(enderec.getCidade());
+        f.setUf(enderec.getUf());
+        f.setNumero(enderec.getNumero());
+        f.setSenha(Criptografia.criptografar(senha.getSenha()));
+        return f;
+    }
+
+    private void escondeDialog() {
+        if (alerta.isShowing()) {
+            alerta.dismiss();
+        }
+    }
+
+    private void mostraDialog() {
+
+        final LayoutInflater li = getLayoutInflater();
+        //inflamos o layout alerta.xml na view
+        View view = li.inflate(R.layout.alert_progress, null);
+        TextView tvDesc = (TextView) view.findViewById(R.id.tvDesc);    //definimos para o botão do layout um clickListener
+        tvDesc.setText("Cadastro de Funcionario...");
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Aguarde...");
+        builder.setView(view);
+        builder.setCancelable(false);
+        alerta = builder.create();
+        alerta.show();
     }
 }

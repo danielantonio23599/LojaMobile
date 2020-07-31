@@ -1,5 +1,6 @@
 package com.daniel.lojamobile.fragment.cadastro;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.util.Log;
@@ -14,6 +15,9 @@ import androidx.fragment.app.Fragment;
 import com.daniel.lojamobile.Cadastro2Activity;
 import com.daniel.lojamobile.R;
 import com.daniel.lojamobile.util.AppSignatureHashHelper;
+import com.daniel.lojamobile.util.GeradorNumeros;
+import com.daniel.lojamobile.util.MaskEditUtil;
+import com.daniel.lojamobile.util.PermissionUtils;
 import com.daniel.lojamobile.util.SMSReceiver;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -23,11 +27,20 @@ public class TelefoneFragment extends Fragment {
     private EditText telefone;
     private TextInputLayout layTelefone;
     public static final String TAG = Cadastro2Activity.class.getSimpleName();
+    private String codigo;
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
 
     private SMSReceiver smsReceiver;
     AppSignatureHashHelper appSignatureHashHelper;
 
-    public String getNome() {
+    public String getTelefone() {
         return telefone.getText() + "";
     }
 
@@ -35,10 +48,10 @@ public class TelefoneFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cadastro_telefone, container, false);
+
         telefone = (EditText) view.findViewById(R.id.input_telefone);
         layTelefone = (TextInputLayout) view.findViewById(R.id.layTelefone);
-       // MaskEditTextChangedListener maskTEL = new MaskEditTextChangedListener("(##)#####-####", telefone);
-       // telefone.addTextChangedListener(maskTEL);
+        telefone.addTextChangedListener(MaskEditUtil.mask(telefone, MaskEditUtil.FORMAT_FONE));
         telefone.requestFocus();
         telefone.setSelection(telefone.length());
 
@@ -46,22 +59,28 @@ public class TelefoneFragment extends Fragment {
 
         // Este código requer um tempo para obter as chaves Hash, comentar e compartilhar as chaves
         Log.i(TAG, "HashKey: " + appSignatureHashHelper.getAppSignatures().get(0));
-
+        String[] permissoes = new String[]{
+                Manifest.permission.SEND_SMS,
+                Manifest.permission.BROADCAST_SMS
+        };
+        PermissionUtils.validate(getActivity(), 0, permissoes);
         return view;
     }
 
     public void enviarSMS() {
+       setCodigo(GeradorNumeros.geraNumeroInterio(5)+"");
         SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage(telefone.getText() + "", null, "<#>Use o Codigo " + " 12345 " + " para confirmar o numero de cadastro do speed food" + appSignatureHashHelper.getAppSignatures().get(0), null, null);
+        smsManager.sendTextMessage(telefone.getText() + "", null, "<#>Use o Codigo " + getCodigo() + " para confirmar o numero de cadastro " + appSignatureHashHelper.getAppSignatures().get(0), null, null);
     }
 
     public boolean verificaTelefone() {
-        if (telefone.getText().length() == 14) {
+        if (telefone.getText().length() < 14) {
+            layTelefone.setError("Telefone incorreto (00)90000-0000");
+            return false;
+        } else {
             layTelefone.setErrorEnabled(false);
             return true;
-        } else {
-            layTelefone.setError("Telefone incorreto");
-            return false;
         }
     }
+
 }

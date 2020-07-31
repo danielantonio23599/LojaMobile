@@ -160,7 +160,7 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
 
         } else if (id == R.id.nav_caixa_abrir) {
             showAbrirCaixa();
-        }  else if (id == R.id.nav_caixa_despesas) {
+        } else if (id == R.id.nav_caixa_despesas) {
             replaceFragment(new DespesaFragment());
         } else if (id == R.id.nav_os_hoje) {
             replaceFragment(new OSHojeFragment());
@@ -168,6 +168,11 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
             replaceFragment(new AdicionarOSFragment());
         } else if (id == R.id.nav_oss) {
             replaceFragment(new OSFragment());
+        } else if (id == R.id.nav_sair) {
+            BdUsuario bd = new BdUsuario(getApplicationContext());
+            bd.deleteAll();
+            bd.close();
+            mudaActivity(LoginGarcomActivity.class);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -215,7 +220,7 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!etValor.getText().equals("")) {
+                if (etValor.getText().equals("")) {
                     Toast.makeText(getApplicationContext(), "Insira uma quantidade adequada", Toast.LENGTH_SHORT).show();
                 } else if (Float.parseFloat(etValor.getText() + "") <= 0) {
                     Toast.makeText(getApplicationContext(), "Insira uma quantidade adequada", Toast.LENGTH_SHORT).show();
@@ -243,7 +248,7 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         BdEmpresa bd = new BdEmpresa(this);
         Empresa sh = bd.listar();
         bd.close();
-        LojaAPI api = SyncDefaut.RETROFIT_LOJA(this).create(LojaAPI.class);
+        LojaAPI api = SyncDefaut.RETROFIT_LOJA().create(LojaAPI.class);
 
         final Call<Void> call = api.isCaixaAberto(sh.getEmpEmail(), sh.getEmpSenha());
         call.enqueue(new Callback<Void>() {
@@ -297,7 +302,7 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         Usuario sh = bd2.listar();
         bd2.close();
         bd.close();
-        LojaAPI api = SyncDefaut.RETROFIT_LOJA(this).create(LojaAPI.class);
+        LojaAPI api = SyncDefaut.RETROFIT_LOJA().create(LojaAPI.class);
         c.setFuncionario(sh.getCodigo());
         final Call<Void> call = api.abrirCaixa(new Gson().toJson(c), sh1.getEmpEmail(), sh1.getEmpSenha());
         call.enqueue(new Callback<Void>() {

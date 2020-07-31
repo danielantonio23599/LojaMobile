@@ -63,7 +63,7 @@ public class OSHojeFragment extends Fragment {
         BdEmpresa bd = new BdEmpresa(getActivity());
         Empresa sh = bd.listar();
         bd.close();
-        LojaAPI api = SyncDefaut.RETROFIT_LOJA(getActivity()).create(LojaAPI.class);
+        LojaAPI api = SyncDefaut.RETROFIT_LOJA().create(LojaAPI.class);
         final Call<ArrayList<OrdemServico>> call = api.listarOSHoje(sh.getEmpEmail(), sh.getEmpSenha());
         call.enqueue(new Callback<ArrayList<OrdemServico>>() {
             @Override

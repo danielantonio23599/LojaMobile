@@ -1,6 +1,9 @@
 package com.daniel.lojamobile.modelo.beans;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Empresa {
+    @SerializedName("empCodigo")
         private int empCodigo;
         private String empEmail;
         private String empSenha;

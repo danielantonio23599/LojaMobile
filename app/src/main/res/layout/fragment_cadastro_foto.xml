@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF"
+    android:orientation="vertical"
     android:fitsSystemWindows="true"
  >
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tvEmail"
@@ -53,23 +48,11 @@
 
         </androidx.cardview.widget.CardView>
 
-    </LinearLayout>
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnFoto"
         android:layout_gravity="bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/backgroud_botao_arredondado"
-        android:text="Foto Galeria"
-        android:textColor="@android:color/darker_gray" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="60dp"
-        app:layout_anchor="@id/button3"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -77,5 +60,13 @@
         android:text="Tirar Foto"
         android:textColor="@android:color/darker_gray" />
 
+    <Button
+        android:id="@+id/btnGaleria"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/backgroud_botao_arredondado"
+        android:text="Foto Galeria"
+        android:textColor="@android:color/darker_gray" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</LinearLayout>
